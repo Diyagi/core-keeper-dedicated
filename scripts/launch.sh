@@ -9,9 +9,6 @@ function kill_corekeeperserver {
 		kill $ckpid
 		wait $ckpid
 	fi
-	if [[ -n "$xvfbpid" ]]; then
-		kill $xvfbpid
-	fi
 }
 
 trap kill_corekeeperserver EXIT TERM
@@ -29,7 +26,6 @@ touch "$logfile"
 
 # Start Xvfb
 Xvfb :99 -screen 0 1x1x24 -nolisten tcp &
-xvfbpid=$!
 
 # Start Core Keeper Server
 DISPLAY=:99 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:../Steamworks SDK Redist/linux64/" ./CoreKeeperServer "${params[@]}" &
