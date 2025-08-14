@@ -56,7 +56,8 @@ services:
     container_name: core-keeper-dedicated
     restart: unless-stopped
     stop_grace_period: 2m
-    # Port is only needed if using direct connection mode
+    # Port is only needed if using Direct Connection mode
+    # Direct Connection mode is REQUIRED for cross-play!
     # ports:
     #   - "$SERVER_PORT:$SERVER_PORT/udp"
     volumes:
@@ -81,6 +82,11 @@ To query the game ID run:
 `docker exec -it core-keeper-dedicated cat /home/steam/core-keeper-dedicated/GameID.txt`
 
 ## Configuration
+> [!IMPORTANT]<br>
+> In version [1.1.2.3](https://store.steampowered.com/news/app/1621690/view/536609788663956850?l=english) cross-play was implemented to all PC platforms.<br>
+> If you want your server to accept connections from platforms other than Steam you need to configure your server in Direct Connection mode.<br>
+> SDR (Steam Datagram Relay) mode will only work for Steam Clients, meaning no cross-play!<br>
+> See [Network Modes](#network-mode)
 
 These are the arguments you can use to customize server behavior with default values.
 
@@ -100,7 +106,9 @@ These are the arguments you can use to customize server behavior with default va
 | MAX_PLAYERS | 10 | Maximum number of players that will be allowed to connect to server. |
 | SERVER_IP | No Default | Only used if port is set. Sets the address that the server will bind to. |
 | SERVER_PORT | No Default | Port used for direct connection mode. **Setting an value to this will cause the server behaviour to change!** [See Network Mode](#network-mode) |
-| DISCORD_WEBHOOK_URL | "" | Webhook url (Edit channel > Integrations > Create Webhook). |
+| SERVER_PASSWORD | "" | Server password, only used when creating cross-play servers |
+| ALLOW_ONLY_PLATFORM | "" | Server platform override, only used with [Direct Connection Mode](#network-mode), Possible values are (both names and indices are valid): Steam(1), Epic(2), Microsoft(3), GOG(4)</br>Unless you want the server to only accept connections from one specific platform **you do not need to set this for cross-play.** |
+| DISCORD_WEBHOOK_URL | "" | Webhook URL (Edit channel > Integrations > Create Webhook). |
 | DISCORD_PLAYER_JOIN_ENABLED | true | Enable/Disable message on player join |
 | DISCORD_PLAYER_JOIN_MESSAGE | `"$${char_name} ($${steamid}) has joined the server."` | Embed message |
 | DISCORD_PLAYER_JOIN_TITLE | "Player Joined" | Embed title |

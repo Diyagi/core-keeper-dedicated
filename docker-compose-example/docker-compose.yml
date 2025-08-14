@@ -4,7 +4,8 @@ services:
     container_name: core-keeper-dedicated
     restart: unless-stopped
     stop_grace_period: 2m
-    # Port is only needed if using direct connection mode
+    # Port is only needed if using Direct Connection mode
+    # Direct Connection mode is REQUIRED for cross-play!
     # ports:
     #   - "$SERVER_PORT:$SERVER_PORT/udp"
     volumes:
