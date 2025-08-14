@@ -82,11 +82,6 @@ To query the game ID run:
 `docker exec -it core-keeper-dedicated cat /home/steam/core-keeper-dedicated/GameID.txt`
 
 ## Configuration
-> [!IMPORTANT]<br>
-> In version [1.1.2.3](https://store.steampowered.com/news/app/1621690/view/536609788663956850?l=english) cross-play was implemented to all PC platforms.<br>
-> If you want your server to accept connections from platforms other than Steam you need to configure your server in Direct Connection mode.<br>
-> SDR (Steam Datagram Relay) mode will only work for Steam Clients, meaning no cross-play!<br>
-> See [Network Modes](#network-mode)
 
 These are the arguments you can use to customize server behavior with default values.
 
@@ -174,6 +169,12 @@ MODS=core-lib,coreliblocalization,corelibrewiredextension:3.0.1,ck-qol:1.9.4
 ## Network Mode
 
 Currently Core Keeper supports two network modes: SDR (Steam Datagram Relay) and Direct Connect.
+
+> [!IMPORTANT]<br>
+> In version [1.1.2.3](https://store.steampowered.com/news/app/1621690/view/536609788663956850?l=english) cross-play was implemented to all PC platforms.<br>
+> If you want your server to accept connections from platforms other than Steam you need to configure your server in Direct Connection mode.<br>
+> SDR (Steam Datagram Relay) mode will only work for Steam Clients, meaning no cross-play!<br>
+> See [Network Modes](#network-mode)
 
 ### SDR (Steam Datagram Relay)
 In this mode, the server uses [Valve's Virtual Network](https://partner.steamgames.com/doc/features/multiplayer/steamdatagramrelay) to route traffic through Steam's relay infrastructure. Instead of players connecting directly to the server's IP address, all communication goes through secure relay nodes managed by Steam. This hides the server’s real IP, protects against DDoS attacks, and improves NAT traversal.
