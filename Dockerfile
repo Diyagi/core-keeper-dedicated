@@ -36,6 +36,8 @@ RUN set -x \
         jq \
         gettext-base \
         unzip \
+		libatomic1 \
+		libpulse0 \
 	wget \
     && rm -rf /var/lib/apt/lists/*
 
