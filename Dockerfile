@@ -36,7 +36,9 @@ RUN set -x \
         jq \
         gettext-base \
         unzip \
-	wget \
+		libatomic1 \
+		libpulse0 \
+	    wget \
     && rm -rf /var/lib/apt/lists/*
 
 RUN case "${TARGETARCH}" in \
@@ -47,8 +49,6 @@ RUN case "${TARGETARCH}" in \
             libxcursor1 \
             libxinerama1 \
             libxss1 \
-            libatomic1 \
-            libpulse0 \
 	&& rm -rf /var/lib/apt/lists/* ;; \
     esac
 
