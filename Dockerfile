@@ -36,9 +36,7 @@ RUN set -x \
         jq \
         gettext-base \
         unzip \
-		libatomic1 \
-		libpulse0 \
-	    wget \
+        wget \
     && rm -rf /var/lib/apt/lists/*
 
 RUN case "${TARGETARCH}" in \
