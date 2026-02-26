@@ -52,9 +52,9 @@ SendDiscordMessage() {
     # shellcheck disable=SC2059
     "${SCRIPTSDIR}"/discord.sh "$title" "$(printf "$message")" "$color" &
     waitpid=$!
-  fi
 
-  if [[ "${wait,,}" == true ]]; then
-    wait "$waitpid"
+    if [[ "${wait,,}" == true ]]; then
+      wait "$waitpid"
+    fi
   fi
 }
