@@ -108,6 +108,7 @@ ENV PUID=1000 \
     SERVER_IP="" \
     SERVER_PORT="" \
     PASSWORD="" \
+    ACTIVATE_ALL_CONTENT=false \
     ALLOW_ONLY_PLATFORM="" \
     DISCORD_WEBHOOK_URL="" \
     # Player Join

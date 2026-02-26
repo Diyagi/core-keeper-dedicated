@@ -14,6 +14,17 @@ add_param() {
     fi
 }
 
+# Function to add flags to parameter array
+# usage: add_flag <name> <$env_value>
+add_flag() {
+    local flag_name="$1"
+    local flag_value="$2"
+
+    if [ "${flag_value,,}" = "true" ]; then
+        params+=("$flag_name")
+    fi
+}
+
 # Makes log file avaliable for other uses.
 logfile="${STEAMAPPDIR}/logs/$(date '+%Y-%m-%d_%H-%M-%S').log"
 params=(
@@ -21,19 +32,21 @@ params=(
     "-logfile" "$logfile"
 )
 
-add_param "-world"      "${WORLD_INDEX}"
-add_param "-worldname"  "${WORLD_NAME}"
-add_param "-worldseed"  "${WORLD_SEED}"
-add_param "-worldmode"  "${WORLD_MODE}"
-add_param "-hashedworldseed"  "${HASHED_WORLD_SEED}"
-add_param "-gameid"     "${GAME_ID}"
-add_param "-datapath"   "${DATA_PATH:-${STEAMAPPDATADIR}}"
-add_param "-maxplayers" "${MAX_PLAYERS}"
-add_param "-season"     "${SEASON}"
-add_param "-ip"         "${SERVER_IP}"
-add_param "-port"       "${SERVER_PORT}"
-add_param "-activatecontent" "${ACTIVATE_CONTENT}"
-add_param "-password"   "${PASSWORD}"
-add_param "-allowonlyplatform" "${ALLOW_ONLY_PLATFORM}"
+add_param "-world"              "${WORLD_INDEX}"
+add_param "-worldname"          "${WORLD_NAME}"
+add_param "-worldseed"          "${WORLD_SEED}"
+add_param "-worldmode"          "${WORLD_MODE}"
+add_param "-hashedworldseed"    "${HASHED_WORLD_SEED}"
+add_param "-gameid"             "${GAME_ID}"
+add_param "-datapath"           "${DATA_PATH:-${STEAMAPPDATADIR}}"
+add_param "-maxplayers"         "${MAX_PLAYERS}"
+add_param "-season"             "${SEASON}"
+add_param "-ip"                 "${SERVER_IP}"
+add_param "-port"               "${SERVER_PORT}"
+add_param "-activatecontent"    "${ACTIVATE_CONTENT}"
+add_param "-password"           "${PASSWORD}"
+add_param "-allowonlyplatform"  "${ALLOW_ONLY_PLATFORM}"
+
+add_flag "-activateallcontent"  "${ACTIVATE_ALL_CONTENT}"
 
 echo "${params[@]}"
