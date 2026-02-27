@@ -6,13 +6,14 @@ cd "${STEAMAPPDIR}" || exit
 
 ### Function for gracefully shutdown
 function kill_corekeeperserver {
-    if [[ -n "$ckpid" ]]; then
-        kill $ckpid
-        wait $ckpid
+    if [[ -n "$ckpid" ]] && kill -0 "$ckpid" 2>/dev/null; then
+        kill "$ckpid"
+        wait "$ckpid"
     fi
-    if [[ -n "$xvfbpid" ]]; then
-        kill $xvfbpid
-        wait $xvfbpid
+
+    if [[ -n "$xvfbpid" ]] && kill -0 "$xvfbpid" 2>/dev/null; then
+        kill "$xvfbpid"
+        wait "$xvfbpid"
     fi
 
     # Sends stop message
@@ -45,7 +46,7 @@ architecture=$(dpkg --print-architecture)
 
 # Start Core Keeper Server
 if [ "$architecture" == "arm64" ]; then
-    DISPLAY=:99 LD_LIBRARY_PATH="${STEAMCMDDIR}/linux64:${BOX64_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}" /usr/local/bin/box64 ./CoreKeeperServer "${params[@]}" &
+    DISPLAY=:99 LD_LIBRARY_PATH="${STEAMCMDDIR}/linux64:/usr/lib:${LD_LIBRARY_PATH#:}" /usr/local/bin/box64 ./CoreKeeperServer "${params[@]}" &
 else
     DISPLAY=:99 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${STEAMCMDDIR}/linux64/" ./CoreKeeperServer "${params[@]}" &
 fi

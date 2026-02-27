@@ -36,15 +36,14 @@ RUN set -x \
         jq \
         gettext-base \
         unzip \
-		libatomic1 \
-		libpulse0 \
-	    wget \
+        wget \
     && rm -rf /var/lib/apt/lists/*
 
 RUN case "${TARGETARCH}" in \
-    "arm64") apt-get update \
+    "arm64") dpkg --add-architecture amd64 \ 
+        && apt-get update \
         && apt-get install -y --no-install-recommends --no-install-suggests \
-            libmonosgen-2.0-1 \
+            libmonosgen-2.0-dev:amd64 \ 
             libdbus-1-3 \
             libxcursor1 \
             libxinerama1 \
@@ -108,6 +107,7 @@ ENV PUID=1000 \
     SERVER_IP="" \
     SERVER_PORT="" \
     PASSWORD="" \
+    ACTIVATE_ALL_CONTENT=false \
     ALLOW_ONLY_PLATFORM="" \
     DISCORD_WEBHOOK_URL="" \
     # Player Join
