@@ -46,7 +46,7 @@ architecture=$(dpkg --print-architecture)
 
 # Start Core Keeper Server
 if [ "$architecture" == "arm64" ]; then
-    DISPLAY=:99 LD_LIBRARY_PATH="${STEAMCMDDIR}/linux64:${BOX64_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}" /usr/local/bin/box64 ./CoreKeeperServer "${params[@]}" &
+    DISPLAY=:99 LD_LIBRARY_PATH="${STEAMCMDDIR}/linux64:/usr/lib:${LD_LIBRARY_PATH#:}" /usr/local/bin/box64 ./CoreKeeperServer "${params[@]}" &
 else
     DISPLAY=:99 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${STEAMCMDDIR}/linux64/" ./CoreKeeperServer "${params[@]}" &
 fi
